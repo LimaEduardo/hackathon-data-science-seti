@@ -12,4 +12,4 @@ def main(args):
 
     texto = uneTituloComentarios([0, titulo], comentariosVideos, 0)
     print(texto)
-    
+    return texto
