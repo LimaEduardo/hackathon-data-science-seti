@@ -1,8 +1,6 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-// https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyAuCfS_exJsoHptFJxRa7mejlYu0gz4yMg&part=snippet
-
 function getInfoVideo(API_KEY,VIDEO_ID){
   const url = `https://www.googleapis.com/youtube/v3/videos?id=${VIDEO_ID}&key=${API_KEY}&part=snippet`
   return new Promise((resolve, reject) => {
