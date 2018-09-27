@@ -1,16 +1,16 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-./hackathon-interface/node_modules
+/node_modules
 
 # testing
-./hackathon-interface/coverage
+/coverage
 
 # production
-./hackathon-interface/build
+/build
 
 # misc
-.DS_Storew
+.DS_Store
 .env.local
 .env.development.local
 .env.test.local
@@ -19,9 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-
-arquivo-final.cvs
-arquivo-final-minimizado.cvs
-.vscode
-
