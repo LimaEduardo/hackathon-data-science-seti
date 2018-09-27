@@ -27,7 +27,7 @@ function getCommentsVideo(API_KEY,VIDEO_ID){
       });
       resolve(listComments)
     }, (error) => {
-      console.log("Ocorreu um erro no getCommentsVideo: "+error.response)
+      console.log("An error occured at getCommentsVideo: "+error.response)
       reject(error)
     })
   })
