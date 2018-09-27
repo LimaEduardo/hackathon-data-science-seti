@@ -1,8 +1,6 @@
 import json
 import csv
-from TrataComentarios import geraDicionarioComentarios, uneTextoComentarios
-
-
+from TrataComentarios import geraDicionarioComentarios, uneTituloComentarios
 
 
 def readFileCSV(fileName):
@@ -45,7 +43,7 @@ def juntaDados(videos, categorias, comentarios):
             except KeyError:
                 titulo = "UNKNOWN"
             
-            texto = uneTextoComentarios(elemento, comentariosVideo, elemento[0])
+            texto = uneTituloComentarios(elemento, comentariosVideo, elemento[0])
             
 
             print(texto)

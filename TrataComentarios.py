@@ -16,18 +16,17 @@ def geraDicionarioComentarios(videos, comentarios, maximoComentarios):
     quantidadeAdicionadaVideo = {}
     for comentario in comentarios:
         comentariosVideo= geraDicionarioComentario(comentario, comentariosVideo, 
-    return comentariosVideo
                                                     quantidadeAdicionadaVideo, maximoComentarios)
+    return comentariosVideo
 
         
-def geraDicionarioComentario(comentario, comentariosVideo, quantidadeAdicionadaVideo, maximoComentarioss):
+def geraDicionarioComentario(comentario, comentariosVideo, quantidadeAdicionadaVideo, maximoComentarios):
     try:
-        if(quantidadeAdicionadaVideo[comentario[0]] < maximoComentarioss):
+        if(quantidadeAdicionadaVideo[comentario[0]] < maximoComentarios):
             comentarioSemPontuacao = removeInvalidos(comentario[1].replace("\\n", " "))
             if(comentarioSemPontuacao != ""):
                 comentariosVideo[comentario[0]] += " " + comentarioSemPontuacao
                 quantidadeAdicionadaVideo[comentario[0]] += 1
-        
     except KeyError:
         comentarioSemPontuacao = removeInvalidos(comentario[1].replace("\\n", " "))
         if(comentarioSemPontuacao != ""):
@@ -36,7 +35,7 @@ def geraDicionarioComentario(comentario, comentariosVideo, quantidadeAdicionadaV
     
     return comentariosVideo
 
-def uneTextoComentarios(video, comentarios, chave):
+def uneTituloComentarios(video, comentarios, chave):
     texto = removeInvalidos(video[1])
     try:
         texto += " " + comentarios[chave]
