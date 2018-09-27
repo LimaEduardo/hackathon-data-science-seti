@@ -78,12 +78,13 @@ export class Descobrir extends Component {
     this.state = {
       // videoURL:"https://www.youtube.com/watch?v=E-WHW-QNswE",
       videoURL:"",
+      videoTitle: "",
       currentTab: 0,
       gettingYoutubeInfo: false,
       sendingInfoToDatabase: false,
       currentStatusInfo: "",
       error: false,
-      errorMessage: ""
+      errorMessage: "",
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleTabChange = this.handleTabChange.bind(this)
@@ -160,7 +161,7 @@ export class Descobrir extends Component {
             <Grid container className={classes.discoveryContainer} direction="row" justify="center" alignItems="center">
               <Paper elevation={24} className={classes.paperRoot}>
                 <Typography variant="title" gutterBottom>
-                  Enter a video URL to discover your category
+                  Enter a video URL to predict your category
                 </Typography>
                 <Grid item xs={12}>
                   <TextField
@@ -184,9 +185,31 @@ export class Descobrir extends Component {
             </Grid>
           ) : null}
           {currentTab === 1 ? (
-            <div>
-              Verificaaaar
-            </div>
+            <Grid container className={classes.discoveryContainer} direction="row" justify="center" alignItems="center">
+            <Paper elevation={24} className={classes.paperRoot}>
+              <Typography variant="title" gutterBottom>
+                Enter a video title to predict your category
+              </Typography>
+              <Grid item xs={12}>
+                <TextField
+                  id="videoTitle"
+                  label="Video Title"
+                  value={this.state.videoURL}
+                  onChange={this.handleChange('videoTitle')}
+                  margin="normal"
+                  className={classes.videoURLTF}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" color="primary" onClick={() => {this.handleClick()}} fullWidth>
+                  Discovery
+                </Button>
+                <RenderLoadingMessage message={currentStatusInfo} classes={classes}/>
+                <RenderError message={errorMessage} classes={classes}/>
+              </Grid>
+            </Paper>
+          </Grid>
           ) : null}
         </Grid>
       </div>
