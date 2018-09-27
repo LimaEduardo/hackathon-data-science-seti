@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom'
 
-import Descobrir from './Containers/Descobrir'
+import Discovery from './Containers/Discovery'
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/descobrir" component={Descobrir} />
+    <Route exact path="/discovery" component={Discovery} />
   </Switch>
 )
 
