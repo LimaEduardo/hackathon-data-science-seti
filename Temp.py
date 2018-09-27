@@ -13,8 +13,3 @@ def main(args):
     texto = uneTituloComentarios([0, titulo], comentariosVideos, 0)
     print(texto)
     
-
-
-
-
-main({"title" : "I hate the americans", "comments" : ["TOP", "good, little boy", "ooh little guy!", "this one i already know that he could win on life", "suuuucks dilma"]})
