@@ -4,16 +4,13 @@ from nltk.tokenize import RegexpTokenizer
 from langdetect import detect
 
 def removePontuacao(texto):
-    tokenizer = RegexpTokenizer(r'\w+')
+    tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
     resultado = " ".join(tokenizer.tokenize(texto))
-    # print(resultado)
-    # if(len(resultado) == 0):
-    #     return ""
-    # deteccao = detect(resultado)
-    # if(deteccao == "en"):
-    #     print("e ingles " + deteccao)
-    # else:
-    #     print("nao e ingles " + deteccao)
+    if(len(resultado) == 0):
+        return ""
+    deteccao = detect(resultado)
+    if(deteccao != "en"):
+        return ""
     return resultado
 
 
@@ -41,16 +38,25 @@ def writeFileCSV(dadosLimpos, fileName):
 def juntaDados(videos, categorias, comentarios):
     fileName = "arquivo-final.csv"
     comentariosVideo = {}
+    quantidadeAdicionadaVideo = {}
     for comentario in comentarios:
         try:
-            comentariosVideo[comentario[0]] += " " + removePontuacao(comentario[1].replace("\\n", " "))
+            if(quantidadeAdicionadaVideo[comentario[0]] < 100):
+                comentarioSemPontuacao = removePontuacao(comentario[1].replace("\\n", " "))
+                if(comentarioSemPontuacao != ""):
+                    comentariosVideo[comentario[0]] += " " + comentarioSemPontuacao
+                    quantidadeAdicionadaVideo[comentario[0]] += 1
+            
         except KeyError:
-            comentariosVideo[comentario[0]] = removePontuacao(comentario[1].replace("\\n", " "))
+            comentarioSemPontuacao = removePontuacao(comentario[1].replace("\\n", " "))
+            if(comentarioSemPontuacao != ""):
+                comentariosVideo[comentario[0]] = removePontuacao(comentario[1].replace("\\n", " "))
+                quantidadeAdicionadaVideo[comentario[0]] = 1
         
     with open(fileName, "w", newline="") as csvfile:
-        fieldnames = ["id", "text", "channel", "category_title", "assignable", "tags", "views", "likes",
-                        "dislikes", "comment_total"]
-        # fieldnames = ["text", "category_title"]
+        # fieldnames = ["id", "text", "channel", "category_title", "assignable", "tags", "views", "likes",
+        #                 "dislikes", "comment_total"]
+        fieldnames = ["text", "category_title"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         # print(videos)
@@ -71,12 +77,14 @@ def juntaDados(videos, categorias, comentarios):
             except KeyError:
                 pass
             
-            writer.writerow({"id" : elemento[0], "text" : texto, "channel" : elemento[2], 
-                            "category_title" : titulo, "assignable" : assignable, "tags" : elemento[4], 
-                            "views" : elemento[5], "likes" : elemento[6], "dislikes" : elemento[7], 
-                            "comment_total" : elemento[8]})
+            # print(texto)
+            # print("------------------------")
+            # writer.writerow({"id" : elemento[0], "text" : texto, "channel" : elemento[2], 
+            #                 "category_title" : titulo, "assignable" : assignable, "tags" : elemento[4], 
+            #                 "views" : elemento[5], "likes" : elemento[6], "dislikes" : elemento[7], 
+            #                 "comment_total" : elemento[8]})
             
-            # writer.writerow({"text" : texto, "category_title" : titulo})
+            writer.writerow({"text" : texto, "category_title" : titulo})
             
 
 def main():
