@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import getComments from '../Actions/getCommentsYoutube'
+import postInfoVideo from '../Actions/postInfoVideo'
 
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +12,7 @@ export class Descobrir extends Component {
     super(props)
 
     this.state = {
-      videoURL:""
+      videoURL:"https://www.youtube.com/watch?v=E-WHW-QNswE"
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -24,7 +25,14 @@ export class Descobrir extends Component {
   };
 
   handleClick(){
-    getComments(this.state.videoURL)
+    getComments(this.state.videoURL).then((listComments) => {
+      console.log(listComments)
+      postInfoVideo(listComments).then((response) => {
+        console.log(response)
+      }, (error) => {
+        console.log("Ocorreu um erro no postInfoVideo: "+ error.response)
+      })
+    })
   }
 
   render() {
