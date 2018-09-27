@@ -38,7 +38,7 @@ def writeFileCSV(dadosLimpos, fileName):
 def juntaDados(videos, categorias, comentarios):
     fileName = "arquivo-final.csv"
     comentariosVideo = {}
-    quantidadeAdicionadaVideo = {}
+    quantidadeAdicionadaVideo = {}quantidadeAdicionadaVideo
     for comentario in comentarios:
         try:
             if(quantidadeAdicionadaVideo[comentario[0]] < 100):
